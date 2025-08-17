@@ -2,7 +2,24 @@ const fileModel = require('../model/fileModel');
 const path = require("path");
 const dontenv = require('dotenv');
 
-// upload banadena bhaiyo iska code kardiyo, baad main leader ji check karlena 
+const UploadController = async (req, res) => {
+    try {
+        dotenv.config();
+        const backendUrl = process.env.BACKEND_URL;
+
+        const fileObject = {
+            path: req.file.path,
+            name: req.file.originalname,
+        };
+        const file = await fileModel.create(fileObject);
+        console.log(file);
+        return res.status(200).json({ path: `${backendUrl}/files/${file._id}` });
+
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+};
+
 
 const downloadController = async(req, res) =>{
     try{
@@ -17,6 +34,7 @@ const downloadController = async(req, res) =>{
     }
 };
 
-module.ecportd ={
+module.exports ={
+    UploadController,
     downloadController
 }
