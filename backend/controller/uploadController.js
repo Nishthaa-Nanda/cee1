@@ -1,6 +1,6 @@
 const fileModel = require('../model/fileModel');
 const path = require("path");
-const dontenv = require('dotenv');
+const dontenv = require("dotenv");
 
 const UploadController = async (req, res) => {
     try {
@@ -21,7 +21,7 @@ const UploadController = async (req, res) => {
 };
 
 
-const downloadController = async(req, res) =>{
+const DownloadController = async(req, res) =>{
     try{
         const file = await fileModel.findById(req.params.fileId);
 
@@ -36,5 +36,5 @@ const downloadController = async(req, res) =>{
 
 module.exports ={
     UploadController,
-    downloadController
+    DownloadController
 }
