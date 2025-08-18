@@ -1,31 +1,84 @@
 body {
-    background-color: rgb(153, 0, 0);
-    color: white;
-    font-family: Arial, sans-serif;
+    background: #fafafa;
+    color: #222;
+    font-family: "Inter", Arial, sans-serif;
     text-align: center;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
-    padding-top: 80px;
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #800000;
+    /* deep maroon accent */
 }
 
 input[type="file"] {
-    margin: 20px 0;
-    padding: 5px;
+    display: block;
+    margin: 1rem auto;
+    padding: 0.6rem;
+    border: 2px dashed #800000;
+    border-radius: 0.5rem;
+    background: #fff5f5;
+    cursor: pointer;
+    transition: border 0.3s ease, background 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: #b22222;
+    background: #ffeaea;
 }
 
 button {
-    background-color: white;
-    color: maroon;
-    border: 2px solid maroon;
-    padding: 8px 16px;
+    background-color: #800000;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.4rem;
     cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #a00000;
+    transform: translateY(-2px);
+}
+
+.result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #fdf2f2;
+    border: 1px solid #f5c2c2;
+    border-radius: 0.5rem;
+}
+
+.result p {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
 }
 
 a {
-    color: #F8BEBE;
+    color: #800000;
+    font-weight: 500;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+a:hover {
     text-decoration: underline;
 }
