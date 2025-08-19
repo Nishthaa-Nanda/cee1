@@ -16,14 +16,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "frontend/public"))); 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "frontend/views"));
+
+
 app.get("/", (req, res) => {
   res.render("index", { fileUrl: null });
 });
 
 app.use("/", router);
+
 app.use((err, req, res, next) => {
-  console.error("Error:", err.message);
-  res.status(500).send("Internal Server Error");
+  console.error("Error:", err.stack);
+  res.status(500).send("internal server error, see index.js line 25");
 });
 
 app.listen(PORT, async () => {

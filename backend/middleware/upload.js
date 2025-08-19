@@ -1,18 +1,20 @@
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../config/cloudinary");
 
-const multer = require('multer');
-const path = require("path"); 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'fileFolder')
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "uploads",
+    resource_type: "auto",
   },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-  }
-})
-
-const upload = multer({ 
-  storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 } 
 });
+
+const upload = multer({ storage });
+
+upload._handleFile = ((handleFile) => (req, file, cb) => {
+  console.log("file handled for:", file.originalname);
+  return handleFile.call(upload, req, file, cb);
+})(upload._handleFile);
 
 module.exports = upload;

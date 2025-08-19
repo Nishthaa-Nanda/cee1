@@ -1,24 +1,24 @@
 const express = require("express");
-const { DownloadController } = require("../controller/uploadController");
-const storage = require("../middleware/upload");
 const dotenv = require("dotenv");
+const cloudinary = require("../config/cloudinary");
+const { DownloadController } = require("../controller/uploadController");
+const upload = require("../middleware/upload");
 const fileModel = require("../model/fileModel");
 
 dotenv.config();
 const router = express.Router();
 
-router.post("/upload", storage.single("file"), async (req, res) => {
+router.post("/upload", upload.single("file"), async (req, res) => {
+console.log("File object from middleware:", req.file);
     try {
-        const backendUrl = process.env.BACKEND_URL;
-
         const fileObject = {
-            path: req.file.path,
+            path: req.file.path,              
             name: req.file.originalname,
         };
 
         const file = await fileModel.create(fileObject);
 
-        res.render("index", { fileUrl: `${backendUrl}/files/${file._id}` });
+        res.render("index", { fileUrl: file.path });
     } catch (err) {
         res.status(500).send(err.message);
     }
