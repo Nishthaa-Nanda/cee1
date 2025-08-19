@@ -18,7 +18,8 @@ console.log("File object from middleware:", req.file);
 
         const file = await fileModel.create(fileObject);
 
-        res.render("index", { fileUrl: file.path });
+        const downloadUrl = file.path.replace('/upload/', '/upload/fl_attachment/');
+        res.render("index", { fileUrl: downloadUrl });
     } catch (err) {
         res.status(500).send(err.message);
     }
